@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: banking-frontend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: banking-backend
+          property: apiUrl
+          envVarPrefix: ''
